@@ -1,0 +1,1193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background: steelblue;  /* Solid background when at top */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    padding: 0.8rem 2rem;
+    background: rgba(70, 130, 180, 0.9);  /* Only transparent when scrolled */
+    backdrop-filter: blur(5px);
+}
+
+.logo {
+    /* Remove or comment out the existing font-size and font-weight */
+    /* font-size: 1.5rem; */
+    /* font-weight: bold; */
+    /* color: white; */
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;  /* Increased from 50px */
+    width: auto;
+    margin: -4px 0;  /* Added negative margin to compensate for larger size */
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    padding: 0 1rem;
+}
+
+/* Add these styles for the active nav link */
+.nav-links li a.active {
+    color: #fff;
+    position: relative;
+}
+
+.nav-links li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: white;
+}
+
+/* Hero Section */
+.hero {
+    /* height: 800px; */
+    height: 100vh;
+    background: #f0f0f0;
+    background-image: url('assets/hero-image.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+/* Add a dark overlay */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);  /* Adjust opacity as needed */
+}
+
+/* Update hero content to ensure it's above the overlay */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;  /* This ensures content stays above overlay */
+    z-index: 1;         /* This ensures content stays above overlay */
+}
+
+.hero-content h1 {
+    color: white;
+    font-size: 3.5rem;  /* Slightly larger */
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* Add subtle text shadow */
+}
+
+.hero-logo {
+    height: 200px;
+    width: auto;
+}
+
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 2rem;
+    background-color: steelblue;
+    color: white;
+    padding: 1.2rem 2.5rem;  /* Slightly larger padding */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);  /* Add subtle shadow */
+}
+
+.hero-btn:hover {
+    background-color: #2d5a7f;
+    transform: translateY(-2px);  /* Add slight lift effect */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);  /* Enhance shadow on hover */
+}
+
+.scroll-arrow {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+    text-decoration: none;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-20px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+}
+
+.scroll-arrow:hover {
+    color: #2d5a7f;
+}
+
+/* Content Sections - Enhanced Design */
+.content-section {
+    padding: 7rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle background pattern to non-reverse sections */
+.content-section:not(.reverse)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 48%, rgba(70, 130, 180, 0.03) 50%, transparent 52%);
+    background-size: 20px 20px;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4rem;  /* Increased gap */
+    position: relative;
+    z-index: 2;
+}
+
+.text-content {
+    flex: 1;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left accent border for regular sections */
+.text-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: steelblue;
+    border-radius: 4px 0 0 4px;
+}
+
+/* Right accent border for "How We Provide Value" section */
+.reverse .text-content::before {
+    left: auto;
+    right: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.text-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.text-content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 15px;
+    text-align: center;
+    color: steelblue;
+}
+
+/* Style key phrases or words */
+.text-content p strong {
+    color: steelblue;
+    font-weight: 600;
+}
+
+.text-content p {
+    line-height: 1.8;
+    color: #555;
+}
+
+.text-content a {
+    color: steelblue;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.text-content a:hover {
+    color: #2d5a7f;
+}
+
+.focus-text {
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+}
+
+.focus-text p {
+    text-align: center;
+    font-style: italic;
+}
+
+.focus-text-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.image-placeholder {
+    flex: 1;
+    height: 400px;
+    background: #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.image-placeholder:hover {
+    transform: perspective(1000px) rotateY(2deg) translateY(-5px);
+}
+
+.reverse .container {
+    flex-direction: row-reverse;
+}
+
+/* Add this new style for the reverse section */
+.content-section.reverse {
+    background-color: #f5f5f5;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle animation to reverse sections */
+.content-section.reverse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 48%, rgba(70, 130, 180, 0.03) 50%, transparent 52%);
+    background-size: 20px 20px;
+    z-index: 1;
+}
+
+/* Contact Form - Complete Reset and New Layout */
+.contact {
+    padding: 7rem 2rem;
+    background: #f9f9f9;
+}
+
+.contact .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Restore the contact-form-wrapper styles */
+.contact-form-wrapper {
+    padding: 3rem 2rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    position: relative;
+    margin-top: 25px;
+}
+
+/* Keep the floating title styles */
+.contact-form-wrapper h2 {
+    position: absolute;
+    top: -65px;  /* Changed from -55px to -65px to move it higher */
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    margin: 0;
+    z-index: 1;
+    width: 50%;
+    text-align: center;
+    color: steelblue;
+}
+
+/* Keep the form styles inside the wrapper */
+form {
+    width: 100%;
+    display: grid;
+    grid-gap: 1.5rem;
+}
+
+input, textarea {
+    padding: 1rem;  /* Slightly reduced padding */
+    border: 1px solid #ddd;  /* Lighter border */
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+textarea {
+    height: 150px;  /* Reduced height */
+    resize: vertical;
+}
+
+form button {
+    padding: 1rem 2rem;
+    margin-top: 0.5rem;
+    width: auto;
+    justify-self: start;
+    background: steelblue;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    background: #2d5a7f;
+    transform: translateY(-2px);
+}
+
+form button:active {
+    transform: translateY(0);
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    background: #103449;
+    color: white;
+    text-align: center;
+}
+
+.social-links {
+    margin-bottom: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+}
+
+/* Points Section */
+.points-section {
+    padding: 7rem 2rem;
+    background-color: #f8f9fa;
+}
+
+.points-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.point-box {
+    flex: 1;
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.point-box:hover {
+    transform: translateY(-5px);
+}
+
+.point-box i {
+    font-size: 2.5rem;
+    color: steelblue;
+    margin-bottom: 1.5rem;
+}
+
+.point-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.point-box p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Modified container for column layout */
+.container.column {
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* Update the media query to be more specific */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: steelblue;
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
+
+    .container, 
+    .container.column,
+    .reverse .container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .text-content {
+        padding: 1.5rem;
+    }
+
+    .image-placeholder {
+        width: 100%;
+        height: 300px;
+    }
+
+    .content-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .points-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .point-box {
+        padding: 1.5rem;
+    }
+
+    .contact {
+        padding: 4rem 1.5rem;
+    }
+
+    form {
+        padding: 2rem;  /* Adjusted padding for mobile */
+        gap: 1.5rem;
+    }
+    
+    .contact h2 {
+        font-size: 2rem;  /* Adjusted font size for mobile */
+    }
+
+    .contact-form-wrapper h2 {
+        width: 80%;  /* Increase width on mobile */
+        font-size: 2rem;  /* Slightly reduce font size if needed */
+        white-space: nowrap;  /* Prevent text from wrapping */
+    }
+}
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+}
+
+.carousel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.carousel-button.prev {
+    left: 20px;
+}
+
+.carousel-button.next {
+    right: 20px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+}
+
+/* Contact section updates */
+.contact-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Form takes 2/3, info takes 1/3 */
+    gap: 2rem;
+    align-items: start;
+}
+
+.contact-info {
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+}
+
+.contact-image {
+    margin: 2rem 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.contact-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item i {
+    color: steelblue;
+    font-size: 1.2rem;
+}
+
+.contact-item p {
+    margin: 0;
+    color: #555;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add this after your existing .text-content::before rule */
+.focus-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: steelblue;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Add this after your .text-content h2 styles */
+.section-icon {
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+.section-icon i {
+    font-size: 2rem;
+    color: steelblue;
+}
+
+/* Blog Styles */
+.blog-header {
+    padding: 12rem 2rem 6rem;
+    background: steelblue;
+    color: white;
+    text-align: center;
+}
+
+.blog-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.blog-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.blog-posts {
+    padding: 5rem 2rem;
+    background: #f9f9f9;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.blog-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: steelblue;
+}
+
+.blog-content p {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.read-more {
+    color: steelblue;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #2d5a7f;
+}
+
+.read-more i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog-header {
+        padding: 8rem 1.5rem 4rem;
+    }
+
+    .blog-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .blog-posts {
+        padding: 3rem 1.5rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Update carousel styles for mobile */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 300px;  /* Reduced from 400px */
+    }
+
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;  /* Changed from cover to contain */
+        background: #f5f5f5;  /* Optional: adds a light background */
+    }
+}
+
+/* Service link styling */
+.service-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    display: flex;
+}
+
+.service-link:hover {
+    transform: none;
+}
+
+.service-link:hover .point-box {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Service page styles */
+.service-header {
+    padding: 12rem 2rem 6rem;
+    background: steelblue;
+    color: white;
+    text-align: center;
+    background-image: url('assets/hero-image.png');
+    background-size: cover;
+    background-position: center;
+}
+.service-header::before {
+    content: '';
+    position: absolute;
+    /* top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);  */
+}
+
+.service-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.service-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.service-content {
+    padding: 5rem 2rem;
+    background: #f9f9f9;
+}
+
+.service-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+    padding: 3rem;
+    position: relative;
+}
+
+.service-detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: steelblue;
+    border-radius: 4px 0 0 4px;
+}
+
+.service-detail h2 {
+    color: steelblue;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-detail p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+.service-detail ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.service-detail li {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: steelblue;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.back-button:hover {
+    background-color: #2d5a7f;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .service-header {
+        padding: 8rem 1.5rem 4rem;
+    }
+    
+    .service-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .service-content {
+        padding: 3rem 1.5rem;
+    }
+    
+    .service-detail {
+        padding: 2rem;
+    }
+}
+
+/* CTA Box styling */
+.cta-box {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: #f0f7ff;
+    border-radius: 12px;
+    border-left: 4px solid steelblue;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cta-box h3 {
+    color: steelblue;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.cta-box p {
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    background-color: steelblue;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #2d5a7f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .cta-box {
+        padding: 1.5rem;
+    }
+}
+
+/* Benefit Cards styling */
+.benefit-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.benefit-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+    border-top: 4px solid steelblue;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    margin-bottom: 1.5rem;
+}
+
+.benefit-icon i {
+    font-size: 2.5rem;
+    color: steelblue;
+}
+
+.benefit-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.benefit-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .benefit-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefit-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Expertise section styling */
+.expertise-section {
+    margin: 3rem 0;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.expertise-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    border-bottom: 3px solid steelblue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.expertise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+}
+
+.expertise-icon {
+    margin-bottom: 1.2rem;
+}
+
+.expertise-icon i {
+    font-size: 2rem;
+    color: steelblue;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #f0f7ff;
+    display: inline-block;
+}
+
+.expertise-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #333;
+}
+
+.expertise-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+    .expertise-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .expertise-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .expertise-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Expertise list styling */
+.expertise-list {
+    margin-top: 2rem;
+    padding-left: 1.5rem;
+    list-style-type: none;
+}
+
+.expertise-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+    color: #555;
+}
+
+.expertise-list li::before {
+    content: '\f0da'; /* FontAwesome icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: steelblue;
+    font-size: 1rem;
+}
